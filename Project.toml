@@ -1,0 +1,13 @@
+name = "DataWorkstation"
+uuid = "e0ebcb34-69ae-4d20-9e42-b33a0f43aa89"
+authors = ["Leandro Ferrado <leferrad@gmail.com> and contributors"]
+version = "0.1.0"
+
+[compat]
+julia = "1.6.5"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
