@@ -1,6 +1,6 @@
 # DataWorkstation.jl
 
-<img style="display: inline;" src="docs/src/assets/logo.png" width="200"/>
+<div align="center"><img src="docs/src/assets/logo.png" width="200"/></div>
 
 *A Julia framework to produce your data projects as a professional artist*
 
