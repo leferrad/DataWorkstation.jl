@@ -1,7 +1,10 @@
 using DataWorkstation
+using Logging
 using Test
 
+Logging.disable_logging(Logging.Info)
+
 @testset "DataWorkstation.jl" begin
-    # Write your tests here.
-    @test 1 == 1
+    include("config/config_object.jl")
+    include("config/parse.jl")
 end
