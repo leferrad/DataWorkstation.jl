@@ -7,6 +7,36 @@ Elements in the object being NamedTuple are converted to ConfigObject instances.
 
 # Fields
 - `_nt::NamedTuple`: stores the keys and values for the configuration
+
+# Examples
+```jldoctest
+julia> raw = (;a=1, b=(;c=3, d=4))
+(a = 1, b = (c = 3, d = 4))
+
+julia> cfg = ConfigObject(raw)
+ConfigObject((a = 1, b = ConfigObject((c = 3, d = 4))))
+
+julia> cfg.b
+ConfigObject((c = 3, d = 4))
+
+julia> cfg.b.d
+4
+
+julia> length(cfg)
+2
+
+julia> keys(cfg), values(cfg)
+((:a, :b), (1, ConfigObject((c = 3, d = 4))))
+
+julia> merge(cfg, (;e=5, f=6))
+ConfigObject((a = 1, b = ConfigObject((c = 3, d = 4)), e = 5, f = 6))
+
+julia> cfg == ConfigObject(raw)
+true
+
+julia> collect(cfg)
+(a = 1, b = (c = 3, d = 4))
+```
 """
 struct ConfigObject
     _nt::NamedTuple
