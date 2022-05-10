@@ -21,4 +21,8 @@ makedocs(;
     pages = ["Home" => "index.md"],
 )
 
-deploydocs(; repo = "github.com/leferrad/DataWorkstation.jl", devbranch = "develop")
+deploydocs(;
+    repo = "github.com/leferrad/DataWorkstation.jl",
+    devbranch = "develop",
+    push_preview = true,
+)
