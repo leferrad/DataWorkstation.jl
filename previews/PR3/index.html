@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Home · DataWorkstation.jl</title><script data-outdated-warner src="assets/warner.js"></script><link rel="canonical" href="https://leferrad.github.io/DataWorkstation.jl/"/><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.044/juliamono.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="assets/documenter.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href><img src="assets/logo.png" alt="DataWorkstation.jl logo"/></a><div class="docs-package-name"><span class="docs-autofit"><a href>DataWorkstation.jl</a></span></div><form class="docs-search" action="search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li class="is-active"><a class="tocitem" href>Home</a><ul class="internal"><li><a class="tocitem" href="#API-Reference"><span>API Reference</span></a></li></ul></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Home</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Home</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/leferrad/DataWorkstation.jl/blob/master/docs/src/index.md#" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="DataWorkstation"><a class="docs-heading-anchor" href="#DataWorkstation">DataWorkstation</a><a id="DataWorkstation-1"></a><a class="docs-heading-anchor-permalink" href="#DataWorkstation" title="Permalink"></a></h1><p>Documentation for <a href="https://github.com/leferrad/DataWorkstation.jl">DataWorkstation</a>.</p><h2 id="API-Reference"><a class="docs-heading-anchor" href="#API-Reference">API Reference</a><a id="API-Reference-1"></a><a class="docs-heading-anchor-permalink" href="#API-Reference" title="Permalink"></a></h2><h3 id="Index"><a class="docs-heading-anchor" href="#Index">Index</a><a id="Index-1"></a><a class="docs-heading-anchor-permalink" href="#Index" title="Permalink"></a></h3><ul><li><a href="#DataWorkstation.Config.ConfigObject"><code>DataWorkstation.Config.ConfigObject</code></a></li><li><a href="#DataWorkstation.Config.load_config"><code>DataWorkstation.Config.load_config</code></a></li><li><a href="#DataWorkstation.Config.parse_config"><code>DataWorkstation.Config.parse_config</code></a></li><li><a href="#DataWorkstation.Config.update_config"><code>DataWorkstation.Config.update_config</code></a></li></ul><h3 id="Config-module"><a class="docs-heading-anchor" href="#Config-module">Config module</a><a id="Config-module-1"></a><a class="docs-heading-anchor-permalink" href="#Config-module" title="Permalink"></a></h3><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.Config.ConfigObject" href="#DataWorkstation.Config.ConfigObject"><code>DataWorkstation.Config.ConfigObject</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">ConfigObject(nt::NamedTuple)
+ConfigObject(cfg::ConfigObject)</code></pre><p>Abstraction to manage configuration values in a program. Elements in the object being NamedTuple are converted to ConfigObject instances.</p><p><strong>Fields</strong></p><ul><li><code>_nt::NamedTuple</code>: stores the keys and values for the configuration</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; raw = (;a=1, b=(;c=3, d=4))
+(a = 1, b = (c = 3, d = 4))
+
+julia&gt; cfg = ConfigObject(raw)
+ConfigObject((a = 1, b = ConfigObject((c = 3, d = 4))))
+
+julia&gt; cfg.b
+ConfigObject((c = 3, d = 4))
+
+julia&gt; cfg.b.d
+4
+
+julia&gt; length(cfg)
+2
+
+julia&gt; keys(cfg), values(cfg)
+((:a, :b), (1, ConfigObject((c = 3, d = 4))))
+
+julia&gt; merge(cfg, (;e=5, f=6))
+ConfigObject((a = 1, b = ConfigObject((c = 3, d = 4)), e = 5, f = 6))
+
+julia&gt; cfg == ConfigObject(raw)
+true
+
+julia&gt; collect(cfg)
+(a = 1, b = (c = 3, d = 4))</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/9763239851870b1e7baba84731f0fa0b940f4d48/src/config/config_object.jl#L1-L40">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.Config.load_config" href="#DataWorkstation.Config.load_config"><code>DataWorkstation.Config.load_config</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">load_config(filename, root) -&gt; ConfigObject</code></pre><p>Load a file as a ConfigObject instance.</p><p><strong>Arguments</strong></p><ul><li><code>filename::AbstractString</code>: the path to load to get the configuration content</li><li><code>root::AbstractString</code>: root for the path to load (optional)</li></ul><p><strong>Returns</strong></p><ul><li><code>ConfigObject</code>: having the content loaded from the file</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; config_dict = Dict(&quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; Dict(&quot;c&quot; =&gt; 2, &quot;d&quot; =&gt; 3))
+Dict{String, Any} with 2 entries:
+  &quot;b&quot; =&gt; Dict(&quot;c&quot;=&gt;2, &quot;d&quot;=&gt;3)
+  &quot;a&quot; =&gt; 1
+
+julia&gt; using TOML
+
+julia&gt; filename = tempdir() * &quot;/cfg.toml&quot;
+&quot;/tmp/cfg.toml&quot;
+
+julia&gt; open(filename, &quot;w&quot;) do io
+       TOML.print(io, config_dict)
+       end;
+
+julia&gt; load_config(filename)
+ConfigObject((b = ConfigObject((c = 2, d = 3)), a = 1))</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/9763239851870b1e7baba84731f0fa0b940f4d48/src/config/parse.jl#L59-L90">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.Config.parse_config" href="#DataWorkstation.Config.parse_config"><code>DataWorkstation.Config.parse_config</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">parse_config(d::Dict, root::AbstractString = &quot;&quot;) -&gt; ConfigObject
+parse_config(s::AbstractString, root) -&gt; Union{ConfigObject, String}</code></pre><p>Parse an input to build a ConfigObject instance. If the input is a Dict, the content will be converted into entries for a ConfigObject. If some entry contains a string of the kind &quot;filename.toml&quot;, it is taken as a file to load as a ConfigObject.</p><p><strong>Arguments</strong></p><ul><li><code>d::Dict</code>: the dict to convert to a ConfigObject instance</li><li><code>s::AbstractString</code>: when a value is a string with a format like &quot;filename.toml&quot;,   the file is loaded from that path as a ConfigObject</li><li><code>root::AbstractString=&quot;&quot;</code>: in case of loading a file,   this is the root for the path to load (optional)</li></ul><p><strong>Returns</strong></p><ul><li><code>ConfigObject</code>: having the content parsed from the input</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; config_dict = Dict(&quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; Dict(&quot;c&quot; =&gt; 2, &quot;d&quot; =&gt; 3))
+Dict{String, Any} with 2 entries:
+  &quot;b&quot; =&gt; Dict(&quot;c&quot;=&gt;2, &quot;d&quot;=&gt;3)
+  &quot;a&quot; =&gt; 1
+
+julia&gt; parse_config(config_dict)
+ConfigObject((b = ConfigObject((c = 2, d = 3)), a = 1))
+
+julia&gt; using TOML
+
+julia&gt; filename = tempdir() * &quot;/cfg.toml&quot;
+&quot;/tmp/cfg.toml&quot;
+
+julia&gt; open(filename, &quot;w&quot;) do io
+       TOML.print(io, config_dict)
+       end;
+
+julia&gt; parse_config(Dict(&quot;cfg&quot; =&gt; &quot;\$($(filename))&quot;))
+ConfigObject((cfg = ConfigObject((b = ConfigObject((c = 2, d = 3)), a = 1)),))</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/9763239851870b1e7baba84731f0fa0b940f4d48/src/config/parse.jl#L6-L46">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.Config.update_config" href="#DataWorkstation.Config.update_config"><code>DataWorkstation.Config.update_config</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">update_config(cfg::ConfigObject, entries::NamedTuple) -&gt; ConfigObject</code></pre><p>Get a new ConfigObject by updating the content with new entries</p><p><strong>Arguments</strong></p><ul><li><code>cfg::ConfigObject</code>: configuration instance to updated</li><li><code>entries::NamedTuple</code>: new entries to put into the configuration instance</li></ul><p><strong>Returns</strong></p><ul><li><code>ConfigObject</code>: having updated entries</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; raw = (;a=1, b=(;c=3, d=4))
+(a = 1, b = (c = 3, d = 4))
+
+julia&gt; cfg = ConfigObject(raw)
+ConfigObject((a = 1, b = ConfigObject((c = 3, d = 4))))
+
+julia&gt; update_config(cfg, (;e=5, f=6))
+ConfigObject((a = 1, b = ConfigObject((c = 3, d = 4)), e = 5, f = 6))</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/9763239851870b1e7baba84731f0fa0b940f4d48/src/config/parse.jl#L97-L120">source</a></section></article></article><nav class="docs-footer"><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.17 on <span class="colophon-date" title="Tuesday 10 May 2022 23:33">Tuesday 10 May 2022</span>. Using Julia version 1.7.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
