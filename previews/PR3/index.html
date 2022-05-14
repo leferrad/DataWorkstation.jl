@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Home · DataWorkstation.jl</title><script data-outdated-warner src="assets/warner.js"></script><link rel="canonical" href="https://leferrad.github.io/DataWorkstation.jl/"/><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.044/juliamono.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="assets/documenter.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href><img src="assets/logo.png" alt="DataWorkstation.jl logo"/></a><div class="docs-package-name"><span class="docs-autofit"><a href>DataWorkstation.jl</a></span></div><form class="docs-search" action="search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li class="is-active"><a class="tocitem" href>Home</a><ul class="internal"><li><a class="tocitem" href="#API-Reference"><span>API Reference</span></a></li></ul></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Home</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Home</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/leferrad/DataWorkstation.jl/blob/master/docs/src/index.md#" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="DataWorkstation"><a class="docs-heading-anchor" href="#DataWorkstation">DataWorkstation</a><a id="DataWorkstation-1"></a><a class="docs-heading-anchor-permalink" href="#DataWorkstation" title="Permalink"></a></h1><p>Documentation for <a href="https://github.com/leferrad/DataWorkstation.jl">DataWorkstation</a>.</p><h2 id="API-Reference"><a class="docs-heading-anchor" href="#API-Reference">API Reference</a><a id="API-Reference-1"></a><a class="docs-heading-anchor-permalink" href="#API-Reference" title="Permalink"></a></h2><h3 id="Index"><a class="docs-heading-anchor" href="#Index">Index</a><a id="Index-1"></a><a class="docs-heading-anchor-permalink" href="#Index" title="Permalink"></a></h3><ul><li><a href="#DataWorkstation.Config.ConfigObject"><code>DataWorkstation.Config.ConfigObject</code></a></li><li><a href="#DataWorkstation.Config.load_config"><code>DataWorkstation.Config.load_config</code></a></li><li><a href="#DataWorkstation.Config.parse_config"><code>DataWorkstation.Config.parse_config</code></a></li><li><a href="#DataWorkstation.Config.update_config"><code>DataWorkstation.Config.update_config</code></a></li></ul><h3 id="Config-module"><a class="docs-heading-anchor" href="#Config-module">Config module</a><a id="Config-module-1"></a><a class="docs-heading-anchor-permalink" href="#Config-module" title="Permalink"></a></h3><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.Config.ConfigObject" href="#DataWorkstation.Config.ConfigObject"><code>DataWorkstation.Config.ConfigObject</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">ConfigObject(nt::NamedTuple)
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Home · DataWorkstation.jl</title><script data-outdated-warner src="assets/warner.js"></script><link rel="canonical" href="https://leferrad.github.io/DataWorkstation.jl/"/><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.044/juliamono.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="assets/documenter.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href><img src="assets/logo.png" alt="DataWorkstation.jl logo"/></a><div class="docs-package-name"><span class="docs-autofit"><a href>DataWorkstation.jl</a></span></div><form class="docs-search" action="search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li class="is-active"><a class="tocitem" href>Home</a><ul class="internal"><li><a class="tocitem" href="#API-Reference"><span>API Reference</span></a></li></ul></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Home</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Home</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/leferrad/DataWorkstation.jl/blob/master/docs/src/index.md#" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="DataWorkstation"><a class="docs-heading-anchor" href="#DataWorkstation">DataWorkstation</a><a id="DataWorkstation-1"></a><a class="docs-heading-anchor-permalink" href="#DataWorkstation" title="Permalink"></a></h1><p>Documentation for <a href="https://github.com/leferrad/DataWorkstation.jl">DataWorkstation</a>.</p><h2 id="API-Reference"><a class="docs-heading-anchor" href="#API-Reference">API Reference</a><a id="API-Reference-1"></a><a class="docs-heading-anchor-permalink" href="#API-Reference" title="Permalink"></a></h2><h3 id="Index"><a class="docs-heading-anchor" href="#Index">Index</a><a id="Index-1"></a><a class="docs-heading-anchor-permalink" href="#Index" title="Permalink"></a></h3><ul><li><a href="#DataWorkstation.Config.ConfigObject"><code>DataWorkstation.Config.ConfigObject</code></a></li><li><a href="#DataWorkstation.IO.FileHandler"><code>DataWorkstation.IO.FileHandler</code></a></li><li><a href="#DataWorkstation.Config.load_config"><code>DataWorkstation.Config.load_config</code></a></li><li><a href="#DataWorkstation.Config.parse_config"><code>DataWorkstation.Config.parse_config</code></a></li><li><a href="#DataWorkstation.Config.update_config"><code>DataWorkstation.Config.update_config</code></a></li><li><a href="#DataWorkstation.IO.load_file"><code>DataWorkstation.IO.load_file</code></a></li><li><a href="#DataWorkstation.IO.methods_load_file"><code>DataWorkstation.IO.methods_load_file</code></a></li><li><a href="#DataWorkstation.IO.methods_save_file"><code>DataWorkstation.IO.methods_save_file</code></a></li><li><a href="#DataWorkstation.IO.register_default_bson_file_handler!"><code>DataWorkstation.IO.register_default_bson_file_handler!</code></a></li><li><a href="#DataWorkstation.IO.register_default_csv_file_handler!"><code>DataWorkstation.IO.register_default_csv_file_handler!</code></a></li><li><a href="#DataWorkstation.IO.register_default_jdf_file_handler!"><code>DataWorkstation.IO.register_default_jdf_file_handler!</code></a></li><li><a href="#DataWorkstation.IO.register_default_serialization_file_handler!"><code>DataWorkstation.IO.register_default_serialization_file_handler!</code></a></li><li><a href="#DataWorkstation.IO.register_file_handler!"><code>DataWorkstation.IO.register_file_handler!</code></a></li><li><a href="#DataWorkstation.IO.save_file"><code>DataWorkstation.IO.save_file</code></a></li><li><a href="#DataWorkstation.IO.unregister_file_handler!"><code>DataWorkstation.IO.unregister_file_handler!</code></a></li></ul><h3 id="Config-module"><a class="docs-heading-anchor" href="#Config-module">Config module</a><a id="Config-module-1"></a><a class="docs-heading-anchor-permalink" href="#Config-module" title="Permalink"></a></h3><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.Config.ConfigObject" href="#DataWorkstation.Config.ConfigObject"><code>DataWorkstation.Config.ConfigObject</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">ConfigObject(nt::NamedTuple)
 ConfigObject(cfg::ConfigObject)</code></pre><p>Abstraction to manage configuration values in a program. Elements in the object being NamedTuple are converted to ConfigObject instances.</p><p><strong>Fields</strong></p><ul><li><code>_nt::NamedTuple</code>: stores the keys and values for the configuration</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; raw = (;a=1, b=(;c=3, d=4))
 (a = 1, b = (c = 3, d = 4))
 
@@ -18,14 +18,14 @@ julia&gt; length(cfg)
 julia&gt; keys(cfg), values(cfg)
 ((:a, :b), (1, ConfigObject((c = 3, d = 4))))
 
-julia&gt; merge(cfg, (;e=5, f=6))
+julia&gt; merge(cfg, ConfigObject((;e=5, f=6)))
 ConfigObject((a = 1, b = ConfigObject((c = 3, d = 4)), e = 5, f = 6))
 
 julia&gt; cfg == ConfigObject(raw)
 true
 
 julia&gt; collect(cfg)
-(a = 1, b = (c = 3, d = 4))</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/9763239851870b1e7baba84731f0fa0b940f4d48/src/config/config_object.jl#L1-L40">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.Config.load_config" href="#DataWorkstation.Config.load_config"><code>DataWorkstation.Config.load_config</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">load_config(filename, root) -&gt; ConfigObject</code></pre><p>Load a file as a ConfigObject instance.</p><p><strong>Arguments</strong></p><ul><li><code>filename::AbstractString</code>: the path to load to get the configuration content</li><li><code>root::AbstractString</code>: root for the path to load (optional)</li></ul><p><strong>Returns</strong></p><ul><li><code>ConfigObject</code>: having the content loaded from the file</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; config_dict = Dict(&quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; Dict(&quot;c&quot; =&gt; 2, &quot;d&quot; =&gt; 3))
+(a = 1, b = (c = 3, d = 4))</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/config/config_object.jl#L1-L40">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.Config.load_config" href="#DataWorkstation.Config.load_config"><code>DataWorkstation.Config.load_config</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">load_config(filename, root) -&gt; ConfigObject</code></pre><p>Load a file as a ConfigObject instance.</p><p><strong>Arguments</strong></p><ul><li><code>filename::AbstractString</code>: the path to load to get the configuration content</li><li><code>root::AbstractString</code>: root for the path to load (optional)</li></ul><p><strong>Returns</strong></p><ul><li><code>ConfigObject</code>: having the content loaded from the file</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; config_dict = Dict(&quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; Dict(&quot;c&quot; =&gt; 2, &quot;d&quot; =&gt; 3))
 Dict{String, Any} with 2 entries:
   &quot;b&quot; =&gt; Dict(&quot;c&quot;=&gt;2, &quot;d&quot;=&gt;3)
   &quot;a&quot; =&gt; 1
@@ -40,7 +40,7 @@ julia&gt; open(filename, &quot;w&quot;) do io
        end;
 
 julia&gt; load_config(filename)
-ConfigObject((b = ConfigObject((c = 2, d = 3)), a = 1))</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/9763239851870b1e7baba84731f0fa0b940f4d48/src/config/parse.jl#L59-L90">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.Config.parse_config" href="#DataWorkstation.Config.parse_config"><code>DataWorkstation.Config.parse_config</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">parse_config(d::Dict, root::AbstractString = &quot;&quot;) -&gt; ConfigObject
+ConfigObject((b = ConfigObject((c = 2, d = 3)), a = 1))</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/config/parse.jl#L59-L90">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.Config.parse_config" href="#DataWorkstation.Config.parse_config"><code>DataWorkstation.Config.parse_config</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">parse_config(d::Dict, root::AbstractString = &quot;&quot;) -&gt; ConfigObject
 parse_config(s::AbstractString, root) -&gt; Union{ConfigObject, String}</code></pre><p>Parse an input to build a ConfigObject instance. If the input is a Dict, the content will be converted into entries for a ConfigObject. If some entry contains a string of the kind &quot;filename.toml&quot;, it is taken as a file to load as a ConfigObject.</p><p><strong>Arguments</strong></p><ul><li><code>d::Dict</code>: the dict to convert to a ConfigObject instance</li><li><code>s::AbstractString</code>: when a value is a string with a format like &quot;filename.toml&quot;,   the file is loaded from that path as a ConfigObject</li><li><code>root::AbstractString=&quot;&quot;</code>: in case of loading a file,   this is the root for the path to load (optional)</li></ul><p><strong>Returns</strong></p><ul><li><code>ConfigObject</code>: having the content parsed from the input</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; config_dict = Dict(&quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; Dict(&quot;c&quot; =&gt; 2, &quot;d&quot; =&gt; 3))
 Dict{String, Any} with 2 entries:
   &quot;b&quot; =&gt; Dict(&quot;c&quot;=&gt;2, &quot;d&quot;=&gt;3)
@@ -59,11 +59,272 @@ julia&gt; open(filename, &quot;w&quot;) do io
        end;
 
 julia&gt; parse_config(Dict(&quot;cfg&quot; =&gt; &quot;\$($(filename))&quot;))
-ConfigObject((cfg = ConfigObject((b = ConfigObject((c = 2, d = 3)), a = 1)),))</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/9763239851870b1e7baba84731f0fa0b940f4d48/src/config/parse.jl#L6-L46">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.Config.update_config" href="#DataWorkstation.Config.update_config"><code>DataWorkstation.Config.update_config</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">update_config(cfg::ConfigObject, entries::NamedTuple) -&gt; ConfigObject</code></pre><p>Get a new ConfigObject by updating the content with new entries</p><p><strong>Arguments</strong></p><ul><li><code>cfg::ConfigObject</code>: configuration instance to updated</li><li><code>entries::NamedTuple</code>: new entries to put into the configuration instance</li></ul><p><strong>Returns</strong></p><ul><li><code>ConfigObject</code>: having updated entries</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; raw = (;a=1, b=(;c=3, d=4))
+ConfigObject((cfg = ConfigObject((b = ConfigObject((c = 2, d = 3)), a = 1)),))</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/config/parse.jl#L6-L46">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.Config.update_config" href="#DataWorkstation.Config.update_config"><code>DataWorkstation.Config.update_config</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">update_config(cfg::ConfigObject, entries::NamedTuple) -&gt; ConfigObject</code></pre><p>Get a new ConfigObject by updating the content with new entries</p><p><strong>Arguments</strong></p><ul><li><code>cfg::ConfigObject</code>: configuration instance to updated</li><li><code>entries::NamedTuple</code>: new entries to put into the configuration instance</li></ul><p><strong>Returns</strong></p><ul><li><code>ConfigObject</code>: having updated entries</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; raw = (;a=1, b=(;c=3, d=4))
 (a = 1, b = (c = 3, d = 4))
 
 julia&gt; cfg = ConfigObject(raw)
 ConfigObject((a = 1, b = ConfigObject((c = 3, d = 4))))
 
 julia&gt; update_config(cfg, (;e=5, f=6))
-ConfigObject((a = 1, b = ConfigObject((c = 3, d = 4)), e = 5, f = 6))</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/9763239851870b1e7baba84731f0fa0b940f4d48/src/config/parse.jl#L97-L120">source</a></section></article></article><nav class="docs-footer"><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.17 on <span class="colophon-date" title="Tuesday 10 May 2022 23:43">Tuesday 10 May 2022</span>. Using Julia version 1.7.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+ConfigObject((a = 1, b = ConfigObject((c = 3, d = 4)), e = 5, f = 6))</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/config/parse.jl#L96-L119">source</a></section></article><h3 id="IO-module"><a class="docs-heading-anchor" href="#IO-module">IO module</a><a id="IO-module-1"></a><a class="docs-heading-anchor-permalink" href="#IO-module" title="Permalink"></a></h3><h4 id="Basic-functions"><a class="docs-heading-anchor" href="#Basic-functions">Basic functions</a><a id="Basic-functions-1"></a><a class="docs-heading-anchor-permalink" href="#Basic-functions" title="Permalink"></a></h4><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.IO.FileHandler" href="#DataWorkstation.IO.FileHandler"><code>DataWorkstation.IO.FileHandler</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">FileHandler{E,V}
+FileHandler(extension::AbstractString, version::Union{AbstractString,Nothing} = nothing)</code></pre><p>Abstraction to handle file operations. It is internally managed by <a href="#DataWorkstation.IO.load_file"><code>load_file()</code></a> and <a href="#DataWorkstation.IO.save_file"><code>save_file()</code></a> methods, so it should not be necessary to instantiate it directly.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; fh = FileHandler(&quot;csv&quot;, &quot;dataframe&quot;)
+FileHandler{:csv, :dataframe}()
+
+julia&gt; FileHandler{:csv, :dataframe} == typeof(fh)
+true
+
+julia&gt; FileHandler(&quot;csv&quot;)
+FileHandler{:csv, :nothing}()</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/io/file_handler.jl#L1-L19">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.IO.load_file" href="#DataWorkstation.IO.load_file"><code>DataWorkstation.IO.load_file</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">load_file(
+    path::AbstractString,
+    args...;
+    version::Union{AbstractString,Nothing} = nothing,
+    kwargs...,
+) -&gt; Any</code></pre><p>Function to load the content of file in <code>path</code>, using a method already registered with a call of <a href="#DataWorkstation.IO.register_file_handler!"><code>register_file_handler!()</code></a> with <code>version</code> and the file extension given in <code>path</code>.</p><p><strong>Arguments</strong></p><ul><li><code>path::AbstractString</code>: path to the file to load, which should have an extension   compatible with a <code>load_file()</code> method already registered</li><li><code>args...</code>: Arguments passed to the registered <code>load_file()</code> method</li></ul><p><strong>Keywords</strong></p><ul><li><code>version::Union{AbstractString,Nothing}</code>: tag to identify the particular method to use</li><li><code>kwargs...</code>: Keyword arguments passed to the registered <code>load_file()</code> method</li></ul><p><strong>Returns</strong></p><ul><li><code>Any</code>: object loaded from the file, and the type will depend on the method implemented</li></ul><p><strong>Throws</strong></p><ul><li><code>ErrorException</code>: In case there is no <code>load_file()</code> method compatible with <code>version</code> and   the extension given in <code>path</code>, or if some error occurs during the load operation.</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; using CSV, DataFrames
+
+julia&gt; register_file_handler!(
+            &quot;csv&quot;,
+            load_file_function = path -&gt; CSV.read(path, DataFrame),
+            save_file_function = (path, obj) -&gt; CSV.write(path, obj),
+        );
+
+julia&gt; df = DataFrame(Dict(&quot;a&quot; =&gt; 1:5, &quot;b&quot; =&gt; 6:10))
+5×2 DataFrame
+ Row │ a      b
+     │ Int64  Int64
+─────┼──────────────
+   1 │     1      6
+   2 │     2      7
+   3 │     3      8
+   4 │     4      9
+   5 │     5     10
+
+julia&gt; save_file(&quot;dataset.csv&quot;, df);
+
+julia&gt; isfile(&quot;dataset.csv&quot;)
+true
+
+julia&gt; run(`head -2 dataset.csv`)
+a,b
+1,6
+Process(`head -2 dataset.csv`, ProcessExited(0))
+
+julia&gt; load_file(&quot;dataset.csv&quot;)
+5×2 DataFrame
+ Row │ a      b
+     │ Int64  Int64
+─────┼──────────────
+   1 │     1      6
+   2 │     2      7
+   3 │     3      8
+   4 │     4      9
+   5 │     5     10
+
+julia&gt; register_file_handler!(
+            &quot;csv&quot;,
+            version = &quot;pipe_delim&quot;,
+            load_file_function = path -&gt; CSV.read(path, DataFrame, delim=&quot;|&quot;),
+            save_file_function = (path, obj) -&gt; CSV.write(path, obj, delim=&quot;|&quot;),
+        );
+
+julia&gt; save_file(&quot;dataset_pipe.csv&quot;, df, version=&quot;pipe_delim&quot;);
+
+julia&gt; run(`head -2 dataset_pipe.csv`)
+a|b
+1|6
+Process(`head -2 dataset_pipe.csv`, ProcessExited(0))
+
+julia&gt; load_file(&quot;dataset_pipe.csv&quot;, version=&quot;pipe_delim&quot;)
+5×2 DataFrame
+ Row │ a      b
+     │ Int64  Int64
+─────┼──────────────
+   1 │     1      6
+   2 │     2      7
+   3 │     3      8
+   4 │     4      9
+   5 │     5     10
+
+julia&gt; register_file_handler!(
+            &quot;csv&quot;,
+            version = &quot;verbose&quot;,
+            load_file_function = (path; verbose=false) -&gt; begin
+                verbose ? println(&quot;Loading dataset from $path...&quot;) : nothing
+                CSV.read(path, DataFrame)
+            end,
+            save_file_function = (path, obj; verbose=false) -&gt; begin
+                verbose ? println(&quot;Saving dataset to $path...&quot;) : nothing
+                CSV.write(path, obj)
+            end
+        );
+
+julia&gt; save_file(&quot;dataset.csv&quot;, df, version=&quot;verbose&quot;, verbose=true);
+Saving dataset to dataset.csv...
+
+julia&gt; load_file(&quot;dataset.csv&quot;, , version=&quot;verbose&quot;, verbose=true)
+Loading dataset from dataset.csv...
+5×2 DataFrame
+ Row │ a      b
+     │ Int64  Int64
+─────┼──────────────
+   1 │     1      6
+   2 │     2      7
+   3 │     3      8
+   4 │     4      9
+   5 │     5     10
+
+julia&gt; length(methods_load_file(&quot;csv&quot;, nothing))
+1
+
+julia&gt; unregister_file_handler!(&quot;csv&quot;, version=nothing);
+
+julia&gt; length(methods_load_file(&quot;csv&quot;, nothing))
+0</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/io/file_handler.jl#L130-L261">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.IO.save_file" href="#DataWorkstation.IO.save_file"><code>DataWorkstation.IO.save_file</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">save_file(
+    path::AbstractString,
+    obj::Any,
+    args...;
+    version::Union{AbstractString,Nothing} = nothing,
+    kwargs...,
+) -&gt; Nothing</code></pre><p>Function to save the content of <code>obj</code> as a file in <code>path</code>, using a method already registered with a call of <a href="#DataWorkstation.IO.register_file_handler!"><code>register_file_handler!()</code></a> with <code>version</code> and the file extension given in <code>path</code>.</p><p>For examples of usage, look at the documentation of <a href="#DataWorkstation.IO.load_file"><code>load_file()</code></a>.</p><p><strong>Arguments</strong></p><ul><li><code>path::AbstractString</code>: path to the file to save, which should have an extension   compatible with a <code>save_file()</code> method already registered</li><li><code>obj::Any</code>: object to be saved as a file in the given <code>path</code></li><li><code>args...</code>: Arguments passed to the registered <code>save_file()</code> method</li></ul><p><strong>Keywords</strong></p><ul><li><code>version::Union{AbstractString,Nothing}</code>: tag to identify the particular method to use</li><li><code>kwargs...</code>: Keyword arguments passed to the registered <code>save_file()</code> method</li></ul><p><strong>Throws</strong></p><ul><li><code>ErrorException</code>: In case there is no <code>save_file()</code> method compatible with <code>version</code> and   the extension given in <code>path</code>, or if some error occurs during the save operation.</li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/io/file_handler.jl#L281-L309">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.IO.methods_load_file" href="#DataWorkstation.IO.methods_load_file"><code>DataWorkstation.IO.methods_load_file</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">methods_load_file(
+    extension::AbstractString,
+    version::Union{AbstractString,Nothing} = nothing
+) -&gt; Vector{Method}</code></pre><p>Get the available methods for <a href="#DataWorkstation.IO.load_file"><code>load_file()</code></a> that are compatible with the arguments <code>extension</code> and <code>version</code>. This is useful to check if there are methods already registered with <a href="#DataWorkstation.IO.register_file_handler!"><code>register_file_handler!()</code></a> that support the arguments.</p><p><strong>Arguments</strong></p><ul><li><code>extension::AbstractString</code>: extension of a file path to support in the registered method</li><li><code>version::Union{AbstractString,Nothing}</code>: version of the registered methods</li></ul><p><strong>Returns</strong></p><ul><li><code>Vector{Method}</code>: available methods that are compatible with the given arguments</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; using CSV, DataFrames
+
+julia&gt; length(methods_load_file(&quot;csv&quot;, nothing))
+0
+
+julia&gt; register_file_handler!(
+            &quot;csv&quot;,
+            load_file_function = path -&gt; CSV.read(path, DataFrame),
+            save_file_function = (path, obj) -&gt; CSV.write(path, obj),
+        );
+
+julia&gt; length(methods_load_file(&quot;csv&quot;, nothing))
+1
+
+julia&gt; unregister_file_handler!(&quot;csv&quot;, version=nothing);
+
+julia&gt; length(methods_load_file(&quot;csv&quot;, nothing))
+0</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/io/file_handler.jl#L36-L74">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.IO.methods_save_file" href="#DataWorkstation.IO.methods_save_file"><code>DataWorkstation.IO.methods_save_file</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">methods_save_file(
+    extension::AbstractString,
+    version::Union{AbstractString,Nothing} = nothing
+) -&gt; Vector{Method}</code></pre><p>Get the available methods for <a href="#DataWorkstation.IO.save_file"><code>save_file()</code></a> that are compatible with the arguments <code>extension</code> and <code>version</code>. This is useful to check if there are methods already registered with <a href="#DataWorkstation.IO.register_file_handler!"><code>register_file_handler!()</code></a> that support the arguments.</p><p><strong>Arguments</strong></p><ul><li><code>extension::AbstractString</code>: extension of a file path to support in the registered method</li><li><code>version::Union{AbstractString,Nothing}</code>: version of the registered methods</li></ul><p><strong>Returns</strong></p><ul><li><code>Vector{Method}</code>: available methods that are compatible with the given arguments</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; using CSV, DataFrames
+
+julia&gt; length(methods_save_file(&quot;csv&quot;, nothing))
+0
+
+julia&gt; register_file_handler!(
+            &quot;csv&quot;,
+            load_file_function = path -&gt; CSV.read(path, DataFrame),
+            save_file_function = (path, obj) -&gt; CSV.write(path, obj),
+        );
+
+julia&gt; length(methods_save_file(&quot;csv&quot;, nothing))
+1
+
+julia&gt; unregister_file_handler!(&quot;csv&quot;, version=nothing);
+
+julia&gt; length(methods_save_file(&quot;csv&quot;, nothing))
+0</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/io/file_handler.jl#L83-L121">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.IO.register_file_handler!" href="#DataWorkstation.IO.register_file_handler!"><code>DataWorkstation.IO.register_file_handler!</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">register_file_handler!(
+    extension::AbstractString;
+    version::Union{AbstractString,Nothing} = nothing,
+    load_file_function::Function,
+    save_file_function::Function,
+) -&gt; Nothing</code></pre><p>Function to register methods for <a href="#DataWorkstation.IO.load_file"><code>load_file()</code></a> and <a href="#DataWorkstation.IO.save_file"><code>save_file()</code></a> that are compatible with file paths having an <code>extension</code> value and some <code>version</code>.</p><p>This way allows to use a single function to save any object with a proper method just based on the extension of the given filename, which is useful to avoid hard-coded file operations in your program.</p><p>You can handle multiple methods for a given extension, using the argument <code>version</code> to specify which method to use for a given file.</p><p>For examples of usage, look at the documentation of <a href="#DataWorkstation.IO.load_file"><code>load_file()</code></a>.</p><p><strong>Arguments</strong></p><ul><li><code>extension::AbstractString</code>: extension to extract from a file path to recognize that the   methods registered should be used</li></ul><p><strong>Keywords</strong></p><ul><li><code>version::Union{AbstractString,Nothing}</code>: tag to identify the type of methods to register</li><li><code>load_file_function::Function</code>: function to use in the call of <a href="#DataWorkstation.IO.load_file"><code>load_file()</code></a></li><li><code>save_file_function::Function</code>: function to use in the call of <a href="#DataWorkstation.IO.save_file"><code>save_file()</code></a></li></ul><p><strong>Throws</strong></p><ul><li><code>ErrorException</code>: In case there are already <code>load_file()</code> and/or <code>save_file()</code> methods   compatible with <code>version</code> and the given <code>extension</code></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/io/file_handler.jl#L332-L364">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.IO.unregister_file_handler!" href="#DataWorkstation.IO.unregister_file_handler!"><code>DataWorkstation.IO.unregister_file_handler!</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">unregister_file_handler!(
+    extension::String;
+    version::Union{AbstractString,Nothing} = nothing
+) -&gt; Nothing</code></pre><p>Function to unregister available methods for <a href="#DataWorkstation.IO.load_file"><code>load_file()</code></a> and <a href="#DataWorkstation.IO.save_file"><code>save_file()</code></a> that were already registered with a call of <a href="#DataWorkstation.IO.register_file_handler!"><code>register_file_handler!()</code></a> having an <code>extension</code> value and some <code>version</code>.</p><p>For examples of usage, look at the documentation of <a href="#DataWorkstation.IO.load_file"><code>load_file()</code></a>.</p><p><strong>Arguments</strong></p><ul><li><code>extension::AbstractString</code>: extension to extract from a file path to recognize the   methods to unregister</li></ul><p><strong>Keywords</strong></p><ul><li><code>version::Union{AbstractString,Nothing}</code>: tag for the type of methods to unregister</li></ul><p><strong>Throws</strong></p><ul><li><code>ErrorException</code>: In case there are no <code>load_file()</code> or <code>save_file()</code> methods   compatible with <code>version</code> and the given <code>extension</code> to unregister</li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/io/file_handler.jl#L392-L414">source</a></section></article><h4 id="Util-functions"><a class="docs-heading-anchor" href="#Util-functions">Util functions</a><a id="Util-functions-1"></a><a class="docs-heading-anchor-permalink" href="#Util-functions" title="Permalink"></a></h4><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.IO.register_default_bson_file_handler!" href="#DataWorkstation.IO.register_default_bson_file_handler!"><code>DataWorkstation.IO.register_default_bson_file_handler!</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">register_default_bson_file_handler!(; extension = &quot;bson&quot;, version = nothing) -&gt; Nothing</code></pre><p>Function to register methods for <a href="#DataWorkstation.IO.load_file"><code>load_file()</code></a> and <a href="#DataWorkstation.IO.save_file"><code>save_file()</code></a> with a default implementation based on the <a href="https://github.com/JuliaIO/BSON.jl"><code>BSON</code></a> library, to be compatible with file paths having an <code>extension</code> value and some <code>version</code>. This internall calls <a href="#DataWorkstation.IO.register_file_handler!"><code>register_file_handler!()</code></a>.</p><p>Useful to save objects like machine learning models or just Julia objects to be retrieved in a Julia session, using a BSON format.</p><p><strong>Arguments</strong></p><ul><li><code>extension::AbstractString</code>: extension of a file path to support in the registered method</li><li><code>version::Union{AbstractString,Nothing}</code>: version of the registered methods</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; extension = &quot;bson&quot;;
+
+julia&gt; version = nothing;
+
+julia&gt; obj = (;a=1, b=2);
+
+julia&gt; filepath = joinpath(tempdir(), &quot;file.$extension&quot;);
+
+julia&gt; register_default_bson_file_handler!(
+            extension = extension;
+            version = version,
+        );
+
+julia&gt; save_file(filepath, obj);
+
+julia&gt; loaded_obj = load_file(filepath);
+
+julia&gt; loaded_obj == obj
+true</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/io/file_handlers_default.jl#L7-L44">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.IO.register_default_csv_file_handler!" href="#DataWorkstation.IO.register_default_csv_file_handler!"><code>DataWorkstation.IO.register_default_csv_file_handler!</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">register_default_csv_file_handler!(; extension = &quot;csv&quot;, version = nothing) -&gt; Nothing</code></pre><p>Function to register methods for <a href="#DataWorkstation.IO.load_file"><code>load_file()</code></a> and <a href="#DataWorkstation.IO.save_file"><code>save_file()</code></a> with a default implementation based on the <a href="https://csv.juliadata.org/stable/"><code>CSV</code></a> library, to be compatible with file paths having an <code>extension</code> value and some <code>version</code>. This internall calls <a href="#DataWorkstation.IO.register_file_handler!"><code>register_file_handler!()</code></a>.</p><p>Useful to save tabular data in plain-text format. Make sure the object is in a compatible format before saving it (e.g. <code>Array</code>, <code>DataFrame</code>, <code>Dict</code>).</p><p><strong>Arguments</strong></p><ul><li><code>extension::AbstractString</code>: extension of a file path to support in the registered method</li><li><code>version::Union{AbstractString,Nothing}</code>: version of the registered methods</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; using DataFrames
+
+julia&gt; extension = &quot;csv&quot;;
+
+julia&gt; version = &quot;v1&quot;;
+
+julia&gt; df = DataFrame(Dict(&quot;a&quot; =&gt; 1:5, &quot;b&quot; =&gt; 6:10))
+5×2 DataFrame
+ Row │ a      b
+     │ Int64  Int64
+─────┼──────────────
+   1 │     1      6
+   2 │     2      7
+   3 │     3      8
+   4 │     4      9
+   5 │     5     10
+
+julia&gt; filepath = joinpath(tempdir(), &quot;file.$extension&quot;);
+
+julia&gt; register_default_csv_file_handler!(
+            extension = extension;
+            version = version,
+        );
+
+julia&gt; save_file(filepath, df, version);
+
+julia&gt; loaded_df = load_file(filepath, version);
+
+julia&gt; loaded_df == df
+true</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/io/file_handlers_default.jl#L58-L106">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.IO.register_default_jdf_file_handler!" href="#DataWorkstation.IO.register_default_jdf_file_handler!"><code>DataWorkstation.IO.register_default_jdf_file_handler!</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">register_default_jdf_file_handler!(; extension = &quot;jdf&quot;, version = nothing) -&gt; Nothing</code></pre><p>Function to register methods for <a href="#DataWorkstation.IO.load_file"><code>load_file()</code></a> and <a href="#DataWorkstation.IO.save_file"><code>save_file()</code></a> with a default implementation based on the <a href="https://github.com/xiaodaigh/JDF.jl"><code>JDF</code></a> library, to be compatible with file paths having an <code>extension</code> value and some <code>version</code>. This internall calls <a href="#DataWorkstation.IO.register_file_handler!"><code>register_file_handler!()</code></a>.</p><p>Useful to save tabular data in binary format. Make sure the object is in <code>DataFrame</code> format.</p><p><strong>Arguments</strong></p><ul><li><code>extension::AbstractString</code>: extension of a file path to support in the registered method</li><li><code>version::Union{AbstractString,Nothing}</code>: version of the registered methods</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; using DataFrames
+
+julia&gt; extension = &quot;jdf&quot;;
+
+julia&gt; version = nothing;
+
+julia&gt; df = DataFrame(Dict(&quot;a&quot; =&gt; 1:5, &quot;b&quot; =&gt; 6:10))
+5×2 DataFrame
+ Row │ a      b
+     │ Int64  Int64
+─────┼──────────────
+   1 │     1      6
+   2 │     2      7
+   3 │     3      8
+   4 │     4      9
+   5 │     5     10
+
+julia&gt; filepath = joinpath(tempdir(), &quot;file.$extension&quot;);
+
+julia&gt; register_default_jdf_file_handler!(
+            extension = extension;
+            version = version,
+        );
+
+julia&gt; save_file(filepath, df);
+
+julia&gt; loaded_df = load_file(filepath);
+
+julia&gt; loaded_df == df
+true</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/io/file_handlers_default.jl#L115-L162">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="DataWorkstation.IO.register_default_serialization_file_handler!" href="#DataWorkstation.IO.register_default_serialization_file_handler!"><code>DataWorkstation.IO.register_default_serialization_file_handler!</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">register_default_serialization_file_handler!(
+    ; extension = &quot;slz&quot;, version = nothing) -&gt; Nothing</code></pre><p>Function to register methods for <a href="#DataWorkstation.IO.load_file"><code>load_file()</code></a> and <a href="#DataWorkstation.IO.save_file"><code>save_file()</code></a> with a default implementation based on the <a href="https://docs.julialang.org/en/v1/stdlib/Serialization/"><code>Serialization</code></a> library, to be compatible with file paths having an <code>extension</code> value and some <code>version</code>. This internall calls <a href="#DataWorkstation.IO.register_file_handler!"><code>register_file_handler!()</code></a>.</p><p>Useful to save objects like machine learning models or just Julia objects to be retrieved in a Julia session, by using a native Julia implementation.</p><p><strong>Arguments</strong></p><ul><li><code>extension::AbstractString</code>: extension of a file path to support in the registered method</li><li><code>version::Union{AbstractString,Nothing}</code>: version of the registered methods</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; extension = &quot;slz&quot;;
+
+julia&gt; version = nothing;
+
+julia&gt; obj = (;a=1, b=2);
+
+julia&gt; filepath = joinpath(tempdir(), &quot;file.$extension&quot;);
+
+julia&gt; register_default_serialization_file_handler!(
+            extension = extension;
+            version = version,
+        );
+
+julia&gt; save_file(filepath, obj);
+
+julia&gt; loaded_obj = load_file(filepath);
+
+julia&gt; loaded_obj == obj
+true</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/leferrad/DataWorkstation.jl/blob/30721e028cd882b7ce40d487bad75cf4ffd38675/src/io/file_handlers_default.jl#L171-L210">source</a></section></article></article><nav class="docs-footer"><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.17 on <span class="colophon-date" title="Saturday 14 May 2022 16:51">Saturday 14 May 2022</span>. Using Julia version 1.7.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
