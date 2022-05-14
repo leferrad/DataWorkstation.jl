@@ -34,9 +34,9 @@ julia> register_default_bson_file_handler!(
             version = version,
         );
 
-julia> save_file(filepath, obj);
+julia> save_file(filepath, obj, version=version);
 
-julia> loaded_obj = load_file(filepath);
+julia> loaded_obj = load_file(filepath, version=version);
 
 julia> loaded_obj == obj
 true
@@ -96,9 +96,9 @@ julia> register_default_csv_file_handler!(
             version = version,
         );
 
-julia> save_file(filepath, df, version);
+julia> save_file(filepath, df, version=version);
 
-julia> loaded_df = load_file(filepath, version);
+julia> loaded_df = load_file(filepath, version=version);
 
 julia> loaded_df == df
 true
@@ -152,9 +152,9 @@ julia> register_default_jdf_file_handler!(
             version = version,
         );
 
-julia> save_file(filepath, df);
+julia> save_file(filepath, df, version=version);
 
-julia> loaded_df = load_file(filepath);
+julia> loaded_df = load_file(filepath, version=version);
 
 julia> loaded_df == df
 true
@@ -200,9 +200,9 @@ julia> register_default_serialization_file_handler!(
             version = version,
         );
 
-julia> save_file(filepath, obj);
+julia> save_file(filepath, obj, version=version);
 
-julia> loaded_obj = load_file(filepath);
+julia> loaded_obj = load_file(filepath, version=version);
 
 julia> loaded_obj == obj
 true

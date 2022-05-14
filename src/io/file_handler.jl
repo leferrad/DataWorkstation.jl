@@ -238,7 +238,7 @@ julia> register_file_handler!(
 julia> save_file("dataset.csv", df, version="verbose", verbose=true);
 Saving dataset to dataset.csv...
 
-julia> load_file("dataset.csv", , version="verbose", verbose=true)
+julia> load_file("dataset.csv", version="verbose", verbose=true)
 Loading dataset from dataset.csv...
 5×2 DataFrame
  Row │ a      b
