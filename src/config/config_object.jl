@@ -28,7 +28,7 @@ julia> length(cfg)
 julia> keys(cfg), values(cfg)
 ((:a, :b), (1, ConfigObject((c = 3, d = 4))))
 
-julia> merge(cfg, (;e=5, f=6))
+julia> merge(cfg, ConfigObject((;e=5, f=6)))
 ConfigObject((a = 1, b = ConfigObject((c = 3, d = 4)), e = 5, f = 6))
 
 julia> cfg == ConfigObject(raw)
@@ -43,9 +43,9 @@ struct ConfigObject
     ConfigObject(x) = x
     ConfigObject(nt::NamedTuple) =
         :_nt in keys(nt) ?
-            throw(KeyError(
-                "Keys of a ConfigObject cannot have a '_nt' entry. Got $(keys(nt))")) :
-            new((; (Symbol(k) => ConfigObject(v) for (k, v) in zip(keys(nt), nt))...))
+        throw(
+            KeyError("Keys of a ConfigObject cannot have a '_nt' entry. Got $(keys(nt))"),
+        ) : new((; (Symbol(k) => ConfigObject(v) for (k, v) in zip(keys(nt), nt))...))
     ConfigObject(cfg::ConfigObject) = cfg
 end
 
@@ -67,13 +67,15 @@ Base.merge(a::NamedTuple, cfg::ConfigObject) = ConfigObject(merge(a, cfg._nt))
 Base.merge(cfg1::ConfigObject, cfg2::ConfigObject) = ConfigObject(merge(cfg1._nt, cfg2._nt))
 Base.length(cfg::ConfigObject) = length(cfg._nt)
 Base.:(==)(a::ConfigObject, b::ConfigObject) =
-    length(a) == length(b) &&
-    all(p1.first == p2.first && p1.second == p2.second
-        for (p1, p2) in zip(
-            sort(collect(pairs(a._nt)), by=x->x.first),
-            sort(collect(pairs(b._nt)), by=x->x.first)))
-Base.collect(cfg::ConfigObject) = (
-    ; (Symbol(k) => (
-        typeof(v) == ConfigObject ? collect(v) : v
+    length(a) == length(b) && all(
+        p1.first == p2.first && p1.second == p2.second for (p1, p2) in zip(
+            sort(collect(pairs(a._nt)), by = x -> x.first),
+            sort(collect(pairs(b._nt)), by = x -> x.first),
+        )
     )
-    for (k, v) in zip(keys(cfg), values(cfg)))...)
+Base.collect(cfg::ConfigObject) = (;
+    (
+        Symbol(k) => (typeof(v) == ConfigObject ? collect(v) : v) for
+        (k, v) in zip(keys(cfg), values(cfg))
+    )...,
+)

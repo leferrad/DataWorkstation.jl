@@ -5,6 +5,20 @@ using .Config
 export ConfigObject, load_config, parse_config, update_config
 
 include("io/IO.jl")
+using .IO
+export FileHandler,
+    load_file,
+    save_file,
+    methods_load_file,
+    methods_save_file,
+    register_file_handler!,
+    unregister_file_handler!
+
+export register_default_bson_file_handler!,
+    register_default_csv_file_handler!,
+    register_default_jdf_file_handler!,
+    register_default_serialization_file_handler!
+
 include("workflows/Workflows.jl")
 
 end
