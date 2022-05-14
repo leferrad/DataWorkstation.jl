@@ -7,7 +7,7 @@ function test_configobject_constructor()
     @test cfg.b isa ConfigObject
     @test cfg.b.c == nt.b.c
     @test ConfigObject(cfg) == cfg
-    @test_throws KeyError ConfigObject((;_nt="value_for_not_valid_key"))
+    @test_throws KeyError ConfigObject((; _nt = "value_for_not_valid_key"))
 end
 
 function test_configobject_iterable()

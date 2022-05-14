@@ -88,8 +88,7 @@ julia> load_config(filename)
 ConfigObject((b = ConfigObject((c = 2, d = 3)), a = 1))
 ```
 """
-load_config(
-    filename::AbstractString, root::AbstractString = "") = begin
+load_config(filename::AbstractString, root::AbstractString = "") = begin
     root = root === "" ? dirname(filename) : root
     parse_config(TOML.parsefile(filename), root)
 end
