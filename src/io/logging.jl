@@ -50,7 +50,7 @@ julia> custom_logger_meta_formatter(date_format=nothing)
 
 julia> custom_logger_meta_formatter(["level", "sublevel"],
        Logging.Info, date_format=nothing, sep=" - ")
-(:cyan, " - level - sublevel - INFO:", "")
+(:cyan, "level - sublevel - INFO:", "")
 ```
 """
 function custom_logger_meta_formatter(
