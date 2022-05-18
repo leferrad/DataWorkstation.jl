@@ -28,7 +28,7 @@ DataWorkstation.Config.update_config
 
 ### IO module
 
-#### Basic functions
+#### File operations
 ```@docs
 DataWorkstation.IO.FileHandler
 DataWorkstation.IO.load_file
@@ -39,10 +39,16 @@ DataWorkstation.IO.register_file_handler!
 DataWorkstation.IO.unregister_file_handler!
 ```
 
-#### Util functions
+#### Util file handlers
 ```@docs
 DataWorkstation.IO.register_default_bson_file_handler!
 DataWorkstation.IO.register_default_csv_file_handler!
 DataWorkstation.IO.register_default_jdf_file_handler!
 DataWorkstation.IO.register_default_serialization_file_handler!
+```
+
+#### Logging utils
+```@docs
+DataWorkstation.IO.custom_logger_meta_formatter
+DataWorkstation.IO.get_formatted_logger
 ```
