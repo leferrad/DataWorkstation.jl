@@ -45,12 +45,12 @@ For example:
 ```jldoctest
 julia> using Logging
 
-julia> DataWorkstation.IO.custom_logger_meta_formatter()
+julia> custom_logger_meta_formatter(date_format=nothing)
 (:blue, "DEBUG:", "")
 
-julia> DataWorkstation.IO.custom_logger_meta_formatter(["level", "sublevel"],
-       Logging.Info, date_format="", sep=" - ")
-(:blue, " - level - sublevel - INFO:", "")
+julia> custom_logger_meta_formatter(["level", "sublevel"],
+       Logging.Info, date_format=nothing, sep=" - ")
+(:cyan, " - level - sublevel - INFO:", "")
 ```
 """
 function custom_logger_meta_formatter(
