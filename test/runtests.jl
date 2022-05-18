@@ -11,4 +11,5 @@ Logging.disable_logging(Logging.Info)
     include("config/parse.jl")
     include("io/file_handler.jl")
     include("io/file_handlers_default.jl")
+    include("io/logging.jl")
 end

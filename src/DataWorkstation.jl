@@ -19,6 +19,8 @@ export register_default_bson_file_handler!,
     register_default_jdf_file_handler!,
     register_default_serialization_file_handler!
 
+export custom_logger_meta_formatter, get_formatted_logger, LOG_LEVELS
+
 include("workflows/Workflows.jl")
 
 end
