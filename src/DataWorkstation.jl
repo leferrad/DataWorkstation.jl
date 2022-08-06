@@ -22,5 +22,10 @@ export register_default_bson_file_handler!,
 export custom_logger_meta_formatter, get_formatted_logger, LOG_LEVELS
 
 include("workflows/Workflows.jl")
+using .Workflows
+export LoggingConfig, get_formatted_logger
+export register_step_function, run_step_function
+export WorkflowSpec
+export run_workflow
 
 end
