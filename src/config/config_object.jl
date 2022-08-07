@@ -1,12 +1,19 @@
 @doc raw"""
+    ConfigObject()
     ConfigObject(nt::NamedTuple)
     ConfigObject(cfg::ConfigObject)
 
 Abstraction to manage configuration values in a program.
-Elements in the object being NamedTuple are converted to ConfigObject instances.
+Elements in the object that are `NamedTuples` will be converted to `ConfigObject` instances.
+Notice that the manipulation of a `ConfigObject` is the same as with a `NamedTuple`. If
+`ConfigObject` is called without arguments, it will be created with an empty `NamedTuple`.
 
 # Fields
 - `_nt::NamedTuple`: stores the keys and values for the configuration
+
+# Throws
+- `ErrorException`: In case there is a '_nt' entry in the passed `NamedTuple` (which is an
+    illegal name for the entries), or if some error occurs during the creation.
 
 # Examples
 ```jldoctest
@@ -44,9 +51,11 @@ struct ConfigObject
     ConfigObject(nt::NamedTuple) =
         :_nt in keys(nt) ?
         throw(
-            KeyError("Keys of a ConfigObject cannot have a '_nt' entry. Got $(keys(nt))"),
+            ErrorException(
+                "Keys of a ConfigObject cannot have a '_nt' entry. Got $(keys(nt))"),
         ) : new((; (Symbol(k) => ConfigObject(v) for (k, v) in zip(keys(nt), nt))...))
     ConfigObject(cfg::ConfigObject) = cfg
+    ConfigObject() = ConfigObject((;))
 end
 
 # Methods to treat a ConfigObject just like a NamedTuple
