@@ -33,8 +33,7 @@ ConfigObject((b = ConfigObject((c = 2, d = 3)), a = 1))
 
 julia> using TOML
 
-julia> filename = tempdir() * "/cfg.toml"
-"/tmp/cfg.toml"
+julia> filename = tempdir() * "/cfg.toml";
 
 julia> open(filename, "w") do io
        TOML.print(io, config_dict)
@@ -96,7 +95,9 @@ end
 @doc raw"""
     update_config(cfg::ConfigObject, entries::NamedTuple) -> ConfigObject
 
-Get a new ConfigObject by updating the content with new entries
+Get a new ConfigObject by updating the content with new entries.
+
+!!! note This function does not modify the argument `cfg`.
 
 # Arguments
 - `cfg::ConfigObject`: configuration instance to updated

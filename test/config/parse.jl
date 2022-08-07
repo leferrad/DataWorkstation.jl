@@ -40,6 +40,8 @@ function test_update_config()
     cfg = ConfigObject(config_nt)
 
     @test update_config(cfg, new_entries) == ConfigObject((; config_nt..., new_entries...))
+    # Ensure that original cfg was not modified by the call of update_config
+    @test cfg == ConfigObject(config_nt)
 end
 
 @testset "parse.jl" begin
