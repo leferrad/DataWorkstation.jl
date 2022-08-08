@@ -25,7 +25,7 @@ function test_methods_load_file_and_save_file()
     @test length(methods_load_file(extension, version)) == 0
     @test length(methods_save_file(extension, version)) == 0
 
-    register_file_handler!(
+    register_file_handler(
         extension;
         version = version,
         load_file_function = x -> x,
@@ -38,7 +38,7 @@ end
 
 function test_register_file_handler()
     let catched_call_load_file = Ref(""), catched_call_save_file = Ref("")
-        register_test_func() = register_file_handler!(
+        register_test_func() = register_file_handler(
             "test_register_file_handler";
             version = nothing,
             load_file_function = x -> catched_call_load_file[] = x,
@@ -58,7 +58,7 @@ end
 function test_unregister_file_handler_nofunction()
     extension = "test_unregister_file_handler_nofunction"
     version = nothing
-    @test_throws ErrorException unregister_file_handler!(extension, version = version)
+    @test_throws ErrorException unregister_file_handler(extension, version = version)
 end
 
 function test_unregister_file_handler_happy_path()
@@ -66,7 +66,7 @@ function test_unregister_file_handler_happy_path()
     version = nothing
     fh = FileHandler(extension, version)
     t = typeof(fh)
-    register_test_func() = register_file_handler!(
+    register_test_func() = register_file_handler(
         extension;
         version = version,
         load_file_function = x -> x,
@@ -75,7 +75,7 @@ function test_unregister_file_handler_happy_path()
     register_test_func()
     @test length(DataWorkstation.IO._methodswith(t, load_file)) == 1
     @test length(DataWorkstation.IO._methodswith(t, save_file)) == 1
-    unregister_file_handler!(extension, version = version)
+    unregister_file_handler(extension, version = version)
     @test length(DataWorkstation.IO._methodswith(t, load_file)) == 0
     @test length(DataWorkstation.IO._methodswith(t, save_file)) == 0
 
@@ -86,17 +86,17 @@ function test_load_file()
     version = nothing
     path = "path/to/file.$extension"
 
-    @test_throws ErrorException Base.invokelatest(load_file, path, version = version)
-    @test_throws ArgumentError Base.invokelatest(load_file, "not_valid_path")
+    @test_throws ErrorException load_file(path, version = version)
+    @test_throws ArgumentError load_file("not_valid_path")
 
-    register_file_handler!(
+    register_file_handler(
         extension;
         version = version,
         load_file_function = p -> p,      # just return the path
         save_file_function = (p, o) -> o,  # just return the object
     )
 
-    result = Base.invokelatest(load_file, path, version = version)
+    result = load_file(path, version = version)
     @test result == path
 end
 
@@ -106,17 +106,17 @@ function test_save_file()
     path = "path/to/file.$extension"
     obj = "object"
 
-    @test_throws ErrorException Base.invokelatest(save_file, path, obj, version = version)
-    @test_throws ArgumentError Base.invokelatest(save_file, "not_valid_path", obj)
+    @test_throws ErrorException save_file(path, obj, version = version)
+    @test_throws ArgumentError save_file("not_valid_path", obj)
 
     let catched_call_save_file = Ref("")
-        register_file_handler!(
+        register_file_handler(
             extension;
             version = version,
             load_file_function = p -> p,
             save_file_function = (p, o) -> catched_call_save_file[] = o,
         )
-        Base.invokelatest(save_file, path, obj, version = version)
+        save_file(path, obj, version = version)
         @test catched_call_save_file[] == obj
     end
 
