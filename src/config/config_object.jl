@@ -52,7 +52,8 @@ struct ConfigObject
         :_nt in keys(nt) ?
         throw(
             ErrorException(
-                "Keys of a ConfigObject cannot have a '_nt' entry. Got $(keys(nt))"),
+                "Keys of a ConfigObject cannot have a '_nt' entry. Got $(keys(nt))",
+            ),
         ) : new((; (Symbol(k) => ConfigObject(v) for (k, v) in zip(keys(nt), nt))...))
     ConfigObject(cfg::ConfigObject) = cfg
     ConfigObject() = ConfigObject((;))
