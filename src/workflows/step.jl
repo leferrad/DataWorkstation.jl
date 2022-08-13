@@ -40,7 +40,7 @@ that will be identified with its name. To be a valid function, it should meet th
 following aspects:
 - It must be available for calls done outside its origin module (so make sure it can be
 imported, or just use `eval` when declaring the function).
-- It must have one argument of the type [`ConfigObject`](@ref) or `Any`. This argument
+- It must have one argument of the type [`ConfigObject`](@ref) or `Any`. This object
 should contain all the necessary configuration to allow the step work correctly.
 - Its return type will depend on the design of the involved step function,
 but in general it is expected to be `Nothing`.
