@@ -20,9 +20,9 @@ For examples of usage, look at the documentation of [`register_step_function()`]
 # Throws
 - `ErrorException`: If some error occurs during the step function execution.
 """
-# NOTE: doing a invokelatest call to get the latest version of the step function to run
 function run_step_function end
 run_step_function(s::Symbol, cfg::ConfigObject) =
+# NOTE: doing a invokelatest call to get the latest version of the step function to run
     Base.invokelatest(run_step_function, WorkflowStep{s}, cfg)
 
 @doc raw"""

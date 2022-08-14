@@ -14,18 +14,14 @@ Abstraction to manage configuration relevant for the logging of a workflow to ex
 - `min_level::Symbol`: Minimum level of log to print, represented as as symbol (e.g.
     `:Debug`, `:Info`, `:Error`, `:Warn`).
 - `colors_config::ColorsConfig`: Configuration of colors to use in console logging, through
-    an instance of a [`DataWorkstation.IO.ColorsConfig`](@ref).
+    an instance of a [`ColorsConfig`](@ref).
 - `workflow::Bool`: Flag to indicate that logging at workflow level should be printed.
 - `jobs::Bool`: Flag to indicate that logging at job level should be printed.
 - `steps::Bool`: Flag to indicate that logging at step level should be printed.
 
 # Arguments
 - `workflow_spec::WorkflowSpec`: Specification of the workflow, so the logging configuration
-     can be extracted from this [`DataWorkstation.Workflows.WorkflowSpec`](@ref) instance.
-
-# Examples
-```jldoctest
-...
+     can be extracted from this [`WorkflowSpec`](@ref) instance.
 ```
 """
 struct LoggingConfig
@@ -124,7 +120,8 @@ Get an instance of [`Logging.ConsoleLogger`]
 (https://docs.julialang.org/en/v1/stdlib/Logging/#Logging.ConsoleLogger), having a format
 for the messages based on the given arguments.
 
-This is a version of [`DataWorkstation.IO.get_formatted_logger()`](@ref), allowing to
+    
+This is a version of [`get_formatted_logger()`](@ref), allowing to
 configure some parameters with `logging_config`.
 
 # Arguments

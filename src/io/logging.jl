@@ -21,6 +21,20 @@ const DEFAULT_LOG_COLORS = Dict(
     :AboveMaxLevel => Base.default_color_error,
 )
 
+@doc raw"""
+    ColorsConfig(colors_by_level::Dict{Symbol,Symbol})
+    ColorsConfig()
+
+Abstraction to handle the configuration of colors for logging operations.
+If no arguments specified, using a default configuration.
+
+# Arguments
+- `colors_by_level::Dict{Symbol,Symbol}`: Mapping of logging level to color (i.e.
+    Dict(:Info => :blue, :Debug => :grey, :Error => :red))
+
+# Throws
+- `ErrorException`: In case some logging level defined is not supported.
+"""
 struct ColorsConfig
     colors_by_level::Dict{Symbol,Symbol}
     ColorsConfig(colors_by_level::Dict{Symbol,Symbol}) = begin
@@ -76,7 +90,7 @@ julia> custom_logger_meta_formatter(date_format=nothing)
 
 julia> custom_logger_meta_formatter(["level", "sublevel"],
        Logging.Info, date_format=nothing, sep=" - ")
-(:cyan, "level - sublevel - INFO:", "")
+(:blue, "level - sublevel - INFO:", "")
 ```
 """
 function custom_logger_meta_formatter(

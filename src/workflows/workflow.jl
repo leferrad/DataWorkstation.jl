@@ -159,7 +159,7 @@ using the configuration specified in a `ConfigObject`.
     during the jobs execution.
 
 # Examples
-```jldoctest
+```julia-repl
 julia> cfg = ConfigObject((;
            result_job_a_step_1 = "res_job_a_step_1",
            result_job_a_step_2 = "res_job_a_step_2",

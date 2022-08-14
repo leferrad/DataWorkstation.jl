@@ -147,10 +147,10 @@ where V <: Union{Tuple{T}, NTuple{N, T} where N} where T`: Dependencies to proce
 julia> jobs_and_deps = [(:job1, ()), (:job2, (:job1,)),
                         (:job3, (:job4,)), (:job4, (:job1, :job2))]
 4-element Vector{Tuple{Symbol, Tuple{Vararg{Symbol, N} where N}}}:
-(:job1, ())
-(:job2, (:job1,))
-(:job3, (:job4,))
-(:job4, (:job1, :job2))
+ (:job1, ())
+ (:job2, (:job1,))
+ (:job3, (:job4,))
+ (:job4, (:job1, :job2))
 
 julia> DataWorkstation.Workflows.get_sorted_jobs_based_on_dependencies(jobs_and_deps)
 4-element Vector{Symbol}:

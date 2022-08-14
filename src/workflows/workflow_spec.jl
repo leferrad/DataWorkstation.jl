@@ -37,6 +37,9 @@ julia> collect(spec)
 julia> using TOML
 
 julia> raw_dict = Dict("a" => 1, "b" => Dict("c" => 3, "d" => 4))
+Dict{String, Any} with 2 entries:
+  "b" => Dict("c"=>3, "d"=>4)
+  "a" => 1
 
 julia> filename = tempdir() * "/workflow.toml";
 

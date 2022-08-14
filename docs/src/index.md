@@ -51,6 +51,7 @@ DataWorkstation.IO.register_default_serialization_file_handler
 ```@docs
 DataWorkstation.IO.custom_logger_meta_formatter
 DataWorkstation.IO.get_formatted_logger
+DataWorkstation.IO.ColorsConfig
 ```
 
 ### Workflows module
@@ -59,7 +60,6 @@ DataWorkstation.IO.get_formatted_logger
 
 ```@docs
 DataWorkstation.Workflows.LoggingConfig
-DataWorkstation.Workflows.get_formatted_logger
 ```
 
 #### Step functions
