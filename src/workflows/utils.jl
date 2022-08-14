@@ -143,7 +143,7 @@ where V <: Union{Tuple{T}, NTuple{N, T} where N} where T`: Dependencies to proce
 - `Vector{T}`: Order of dependencies to follow when executing the workflow associated.
 
 # Examples
-```jldoctest
+```julia-repl
 julia> jobs_and_deps = [(:job1, ()), (:job2, (:job1,)),
                         (:job3, (:job4,)), (:job4, (:job1, :job2))]
 4-element Vector{Tuple{Symbol, Tuple{Vararg{Symbol, N} where N}}}:
