@@ -2,7 +2,6 @@ using DataWorkstation
 
 using DataFrames
 using Logging
-using SimpleMock
 using Test
 
 # Disable logging output to allow easier inspection of test results

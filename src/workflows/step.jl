@@ -1,4 +1,4 @@
-"""Struct to represent Steps in a Worfklow"""
+"""Struct to represent Steps in a Workflow"""
 struct WorkflowStep{S} end
 
 @doc raw"""

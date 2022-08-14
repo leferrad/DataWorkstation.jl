@@ -128,8 +128,8 @@ end
     ) where V <: Union{Tuple{T}, NTuple{N, T} where N} where T -> Vector{T}
 
 Get a sorted list of generic `T` objects representing the correct order of dependencies
-in a sequence of jobs defined for a Worfklow. This is very useful
-to ensure a correct execution of a Worfklow.
+in a sequence of jobs defined for a Workflow. This is very useful
+to ensure a correct execution of a Workflow.
 
 The implementation was maded based on this solution: https://stackoverflow.com/a/11564323.
 
