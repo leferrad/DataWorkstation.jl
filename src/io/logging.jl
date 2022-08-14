@@ -11,6 +11,46 @@ const LOG_LEVELS = Dict(
     :AboveMaxLevel => Logging.AboveMaxLevel,
 )
 
+# Defaul colors to be used for each logging level
+const DEFAULT_LOG_COLORS = Dict(
+    :BelowMinLevel => Base.default_color_answer,
+    :Debug => Base.default_color_debug,
+    :Info => Base.default_color_info,
+    :Warn => Base.default_color_warn,
+    :Error => Base.default_color_error,
+    :AboveMaxLevel => Base.default_color_error,
+)
+
+@doc raw"""
+    ColorsConfig(colors_by_level::Dict{Symbol,Symbol})
+    ColorsConfig()
+
+Abstraction to handle the configuration of colors for logging operations.
+If no arguments specified, using a default configuration.
+
+# Arguments
+- `colors_by_level::Dict{Symbol,Symbol}`: Mapping of logging level to color (i.e.
+    Dict(:Info => :blue, :Debug => :grey, :Error => :red))
+
+# Throws
+- `ErrorException`: In case some logging level defined is not supported.
+"""
+struct ColorsConfig
+    colors_by_level::Dict{Symbol,Symbol}
+    ColorsConfig(colors_by_level::Dict{Symbol,Symbol}) = begin
+        supported_log_levels = keys(LOG_LEVELS)
+        any([!(k in supported_log_levels) for k in keys(colors_by_level)]) &&
+        throw(ErrorException("""
+            Argument for ColorsConfig must support the following log levels: $(
+                supported_log_levels). Got: $(collect(keys(colors_by_level)))"""))
+        new(colors_by_level)
+    end
+    ColorsConfig() = new(DEFAULT_LOG_COLORS)
+end
+Base.keys(c::ColorsConfig) = keys(c.colors_by_level)
+Base.values(c::ColorsConfig) = values(c.colors_by_level)
+Base.getindex(c::ColorsConfig, s::Symbol) = c.colors_by_level[s]
+
 @doc raw"""
     custom_logger_meta_formatter(
         labels::Union{Vector{T}, Nothing} = nothing,
@@ -50,7 +90,7 @@ julia> custom_logger_meta_formatter(date_format=nothing)
 
 julia> custom_logger_meta_formatter(["level", "sublevel"],
        Logging.Info, date_format=nothing, sep=" - ")
-(:cyan, "level - sublevel - INFO:", "")
+(:blue, "level - sublevel - INFO:", "")
 ```
 """
 function custom_logger_meta_formatter(
@@ -58,9 +98,9 @@ function custom_logger_meta_formatter(
     log_level::Logging.LogLevel = Logging.Debug;
     sep::AbstractString = " | ",
     date_format::Union{AbstractString,Nothing} = "yyyy-mm-dd HH:MM:SS",
+    color::Symbol = DEFAULT_LOG_COLORS[:Debug],
 ) where {T<:Union{Any,String}}
     @nospecialize
-    color = Logging.default_logcolor(log_level)
     prefix, suffix = "", ""
     if date_format !== nothing
         date = format(now(), DateFormat(date_format))
@@ -82,6 +122,7 @@ end
         stream::Base.IO=stderr,
         sep::String=" | ",
         date_format::AbstractString = "yyyy-mm-dd HH:MM:SS",
+        colors_config::ColorsConfig = ColorsConfig(),
         kwargs...) -> Logging.ConsoleLogger
 
 Get an instance of [`Logging.ConsoleLogger`]
@@ -134,10 +175,11 @@ function get_formatted_logger(
     stream::Base.IO = stderr,
     sep::String = " | ",
     date_format::AbstractString = "yyyy-mm-dd HH:MM:SS",
+    colors_config::ColorsConfig = ColorsConfig(),
     kwargs...,
 )
-    level =
-        min_level in keys(LOG_LEVELS) ? LOG_LEVELS[min_level] :
+    min_level_ =
+        min_level ∈ keys(LOG_LEVELS) ? LOG_LEVELS[min_level] :
         throw(ErrorException("""
         Logging level '$min_level' not recognized. Must be in $(collect(keys(LOG_LEVELS)))
         """))
@@ -148,6 +190,7 @@ function get_formatted_logger(
         log_level,
         sep = sep,
         date_format = date_format,
+        color = colors_config[Symbol(log_level)],
     )
-    return Logging.ConsoleLogger(stream, level, meta_formatter = meta_formatter)
+    return Logging.ConsoleLogger(stream, min_level_, meta_formatter = meta_formatter)
 end

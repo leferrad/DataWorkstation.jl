@@ -4,7 +4,7 @@ import TOML
 CONFIG_FILE_REGEX = r"\$\((.*?).toml\)"
 
 @doc raw"""
-    parse_config(d::Dict, root::AbstractString = "") -> ConfigObject
+    parse_config(d::Dict, root::Union{AbstractString,Nothing}) -> ConfigObject
     parse_config(s::AbstractString, root) -> Union{ConfigObject, String}
 
 Parse an input to build a ConfigObject instance. If the input is a Dict, the content
@@ -15,7 +15,7 @@ the kind "$(filename.toml)", it is taken as a file to load as a ConfigObject.
 - `d::Dict`: the dict to convert to a ConfigObject instance
 - `s::AbstractString`: when a value is a string with a format like "$(filename.toml)",
     the file is loaded from that path as a ConfigObject
-- `root::AbstractString=""`: in case of loading a file,
+- `root::Union{AbstractString,Nothing}`: in case of loading a file,
     this is the root for the path to load (optional)
 
 # Returns
@@ -33,8 +33,7 @@ ConfigObject((b = ConfigObject((c = 2, d = 3)), a = 1))
 
 julia> using TOML
 
-julia> filename = tempdir() * "/cfg.toml"
-"/tmp/cfg.toml"
+julia> filename = tempdir() * "/cfg.toml";
 
 julia> open(filename, "w") do io
        TOML.print(io, config_dict)
@@ -44,17 +43,18 @@ julia> parse_config(Dict("cfg" => "\$($(filename))"))
 ConfigObject((cfg = ConfigObject((b = ConfigObject((c = 2, d = 3)), a = 1)),))
 ```
 """
-parse_config(d::Dict, root::AbstractString = "") =
+parse_config(d::Dict, root::Union{AbstractString,Nothing} = nothing) =
     ConfigObject((; (Symbol(p.first) => parse_config(p.second, root) for p in d)...))
-parse_config(s::AbstractString, root::AbstractString = "") = begin
+parse_config(s::AbstractString, root::Union{AbstractString,Nothing} = nothing) = begin
     m = match(CONFIG_FILE_REGEX, s)
     if m !== nothing
         fn = "$(m.captures[1]).toml"
+        root = root === nothing ? "" : root
         return parse_config(TOML.tryparsefile(root * "/" * fn), root)
     end
     s
 end
-parse_config(x, root = "") = x
+parse_config(x, root = nothing) = x
 
 @doc raw"""
     load_config(filename, root) -> ConfigObject
@@ -63,7 +63,7 @@ Load a file as a ConfigObject instance.
 
 # Arguments
 - `filename::AbstractString`: the path to load to get the configuration content
-- `root::AbstractString`: root for the path to load (optional)
+- `root::Union{AbstractString,Nothing}`: root for the path to load (optional)
 
 # Returns
 - `ConfigObject`: having the content loaded from the file
@@ -88,15 +88,17 @@ julia> load_config(filename)
 ConfigObject((b = ConfigObject((c = 2, d = 3)), a = 1))
 ```
 """
-load_config(filename::AbstractString, root::AbstractString = "") = begin
-    root = root === "" ? dirname(filename) : root
+load_config(filename::AbstractString, root::Union{AbstractString,Nothing} = nothing) = begin
+    root = root === nothing ? dirname(filename) : root
     parse_config(TOML.parsefile(filename), root)
 end
 
 @doc raw"""
     update_config(cfg::ConfigObject, entries::NamedTuple) -> ConfigObject
 
-Get a new ConfigObject by updating the content with new entries
+Get a new ConfigObject by updating the content with new entries.
+
+!!! note This function does not modify the argument `cfg`.
 
 # Arguments
 - `cfg::ConfigObject`: configuration instance to updated

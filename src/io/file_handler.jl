@@ -41,7 +41,7 @@ _methodswith(t, func) = filter(
 
 Get the available methods for [`load_file()`](@ref) that are compatible with the
 arguments `extension` and `version`. This is useful to check if there are methods
-already registered with [`register_file_handler!()`](@ref) that support the arguments.
+already registered with [`register_file_handler()`](@ref) that support the arguments.
 
 # Arguments
 - `extension::AbstractString`: extension of a file path to support in the registered method
@@ -57,7 +57,7 @@ julia> using CSV, DataFrames
 julia> length(methods_load_file("csv", nothing))
 0
 
-julia> register_file_handler!(
+julia> register_file_handler(
             "csv",
             load_file_function = path -> CSV.read(path, DataFrame),
             save_file_function = (path, obj) -> CSV.write(path, obj),
@@ -66,7 +66,7 @@ julia> register_file_handler!(
 julia> length(methods_load_file("csv", nothing))
 1
 
-julia> unregister_file_handler!("csv", version=nothing);
+julia> unregister_file_handler("csv", version=nothing);
 
 julia> length(methods_load_file("csv", nothing))
 0
@@ -88,7 +88,7 @@ end
 
 Get the available methods for [`save_file()`](@ref) that are compatible with the
 arguments `extension` and `version`. This is useful to check if there are methods
-already registered with [`register_file_handler!()`](@ref) that support the arguments.
+already registered with [`register_file_handler()`](@ref) that support the arguments.
 
 # Arguments
 - `extension::AbstractString`: extension of a file path to support in the registered method
@@ -104,7 +104,7 @@ julia> using CSV, DataFrames
 julia> length(methods_save_file("csv", nothing))
 0
 
-julia> register_file_handler!(
+julia> register_file_handler(
             "csv",
             load_file_function = path -> CSV.read(path, DataFrame),
             save_file_function = (path, obj) -> CSV.write(path, obj),
@@ -113,7 +113,7 @@ julia> register_file_handler!(
 julia> length(methods_save_file("csv", nothing))
 1
 
-julia> unregister_file_handler!("csv", version=nothing);
+julia> unregister_file_handler("csv", version=nothing);
 
 julia> length(methods_save_file("csv", nothing))
 0
@@ -136,7 +136,7 @@ end
     ) -> Any
 
 Function to load the content of file in `path`, using a
-method already registered with a call of [`register_file_handler!()`](@ref) with
+method already registered with a call of [`register_file_handler()`](@ref) with
 `version` and the file extension given in `path`.
 
 # Arguments
@@ -159,7 +159,7 @@ method already registered with a call of [`register_file_handler!()`](@ref) with
 ```jldoctest
 julia> using CSV, DataFrames
 
-julia> register_file_handler!(
+julia> register_file_handler(
             "csv",
             load_file_function = path -> CSV.read(path, DataFrame),
             save_file_function = (path, obj) -> CSV.write(path, obj),
@@ -197,7 +197,7 @@ julia> load_file("dataset.csv")
    4 │     4      9
    5 │     5     10
 
-julia> register_file_handler!(
+julia> register_file_handler(
             "csv",
             version = "pipe_delim",
             load_file_function = path -> CSV.read(path, DataFrame, delim="|"),
@@ -222,7 +222,7 @@ julia> load_file("dataset_pipe.csv", version="pipe_delim")
    4 │     4      9
    5 │     5     10
 
-julia> register_file_handler!(
+julia> register_file_handler(
             "csv",
             version = "verbose",
             load_file_function = (path; verbose=false) -> begin
@@ -253,7 +253,7 @@ Loading dataset from dataset.csv...
 julia> length(methods_load_file("csv", nothing))
 1
 
-julia> unregister_file_handler!("csv", version=nothing);
+julia> unregister_file_handler("csv", version=nothing);
 
 julia> length(methods_load_file("csv", nothing))
 0
@@ -271,11 +271,12 @@ load_file(
         """))
     fh = FileHandler(replace(extension, "." => ""), version)
     t = typeof(fh)
-    length(_methodswith(t, load_file)) > 0 ? load_file(fh, path, args...; kwargs...) :
-    throw(ErrorException("""
-        No method for load_file() compatible with path='$path' and version=$version.
-        Available methods: $(Base.methods(load_file))
-        """))
+    length(_methodswith(t, load_file)) > 0 ?
+        Base.invokelatest(load_file, fh, path, args...; kwargs...) :
+        throw(ErrorException("""
+            No method for load_file() compatible with path='$path' and version=$version.
+            Available methods: $(Base.methods(load_file))
+            """))
 end
 
 @doc raw"""
@@ -288,7 +289,7 @@ end
     ) -> Nothing
 
 Function to save the content of `obj` as a file in `path`, using a
-method already registered with a call of [`register_file_handler!()`](@ref) with
+method already registered with a call of [`register_file_handler()`](@ref) with
 `version` and the file extension given in `path`.
 
 For examples of usage, look at the documentation of [`load_file()`](@ref).
@@ -321,16 +322,16 @@ save_file(
     fh = FileHandler(replace(extension, "." => ""), version)
     t = typeof(fh)
     length(_methodswith(t, save_file)) > 0 ?
-    save_file(fh, path, obj, args...; kwargs...) :
-    throw(ErrorException("""
-        No method for save_file() compatible with path='$path' and version=$version.
-        Available methods: $(Base.methods(save_file))
-        """))
+        Base.invokelatest(save_file, fh, path, obj, args...; kwargs...) :
+        throw(ErrorException("""
+            No method for save_file() compatible with path='$path' and version=$version.
+            Available methods: $(Base.methods(save_file))
+            """))
     return
 end
 
 @doc raw"""
-    register_file_handler!(
+    register_file_handler(
         extension::AbstractString;
         version::Union{AbstractString,Nothing} = nothing,
         load_file_function::Function,
@@ -362,7 +363,7 @@ For examples of usage, look at the documentation of [`load_file()`](@ref).
 - `ErrorException`: In case there are already `load_file()` and/or `save_file()` methods
     compatible with `version` and the given `extension`
 """
-function register_file_handler!(
+function register_file_handler(
     extension::AbstractString;
     version::Union{AbstractString,Nothing} = nothing,
     load_file_function::Function,
@@ -390,13 +391,13 @@ function register_file_handler!(
 end
 
 @doc raw"""
-    unregister_file_handler!(
+    unregister_file_handler(
         extension::String;
         version::Union{AbstractString,Nothing} = nothing
     ) -> Nothing
 
 Function to unregister available methods for [`load_file()`](@ref) and [`save_file()`](@ref)
-that were already registered with a call of [`register_file_handler!()`](@ref)
+that were already registered with a call of [`register_file_handler()`](@ref)
 having an `extension` value and some `version`.
 
 For examples of usage, look at the documentation of [`load_file()`](@ref).
@@ -412,7 +413,7 @@ For examples of usage, look at the documentation of [`load_file()`](@ref).
 - `ErrorException`: In case there are no `load_file()` or `save_file()` methods
     compatible with `version` and the given `extension` to unregister
 """
-function unregister_file_handler!(
+function unregister_file_handler(
     extension::String;
     version::Union{AbstractString,Nothing} = nothing,
 )

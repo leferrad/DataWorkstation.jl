@@ -23,9 +23,22 @@ function test_get_formatted_logger()
     @test logger_withargs.min_level == Logging.Debug
 end
 
+function test_colors_config()
+    colors_by_level = Dict(:Info => :blue, :Error => :red)
+    col_cfg = ColorsConfig(colors_by_level)
+    @test col_cfg.colors_by_level == colors_by_level
+    @test keys(col_cfg) == keys(colors_by_level)
+    @test values(col_cfg) == values(colors_by_level)
+    @test col_cfg[:Info] == colors_by_level[:Info]
+    @test ColorsConfig() isa ColorsConfig
+
+    @test_throws ErrorException ColorsConfig(Dict(:NotSupportedLevel => :red))
+end
+
 @testset "logging.jl" begin
     @testset "unit" begin
         test_custom_logger_meta_formatter()
         test_get_formatted_logger()
+        test_colors_config()
     end
 end

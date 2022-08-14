@@ -14,8 +14,8 @@ function test_parse_config()
     config_dict = Dict("a" => 1, "b" => Dict("c" => 2, "d" => 3))
     config_nt = (; a = 1, b = (; c = 2, d = 3))
     cfg = ConfigObject(config_nt)
-    @test parse_config(config_dict, "") == cfg
-    @test parse_config("not_valid", "") == "not_valid"
+    @test parse_config(config_dict, nothing) == cfg
+    @test parse_config("not_valid", nothing) == "not_valid"
 
     filename = create_temp_config_file(config_dict)
     root, fname = dirname(filename), basename(filename)
@@ -40,6 +40,8 @@ function test_update_config()
     cfg = ConfigObject(config_nt)
 
     @test update_config(cfg, new_entries) == ConfigObject((; config_nt..., new_entries...))
+    # Ensure that original cfg was not modified by the call of update_config
+    @test cfg == ConfigObject(config_nt)
 end
 
 @testset "parse.jl" begin
