@@ -49,6 +49,7 @@ parse_config(s::AbstractString, root::Union{AbstractString,Nothing} = nothing) =
     m = match(CONFIG_FILE_REGEX, s)
     if m !== nothing
         fn = "$(m.captures[1]).toml"
+        root = root === nothing ? "" : root
         return parse_config(TOML.tryparsefile(root * "/" * fn), root)
     end
     s
