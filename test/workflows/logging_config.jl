@@ -1,26 +1,29 @@
 function test_loggingconfig_constructor_default_when_no_logging_config()
-    logging_config = LoggingConfig(
-        WorkflowSpec((;no_logging_config=true))
-    )
+    logging_config = LoggingConfig(WorkflowSpec((; no_logging_config = true)))
 
     @test logging_config isa LoggingConfig
 end
 
 function test_loggingconfig_constructor_with_logging_parameters()
     logging_config = LoggingConfig(
-        WorkflowSpec((;logging=(;
-            min_level=:Debug,
-            color=(;Info="yellow", Debug="green"),
-            workflow=true, jobs=true, steps=false)
-        ))
+        WorkflowSpec((;
+            logging = (;
+                min_level = :Debug,
+                color = (; Info = "yellow", Debug = "green"),
+                workflow = true,
+                jobs = true,
+                steps = false,
+            ),
+        )),
     )
     @test logging_config isa LoggingConfig
     @test logging_config.min_level == :Debug
     expected_colors_config = Dict(:Info => :yellow, :Debug => :green)
     @test logging_config.colors_config isa DataWorkstation.IO.ColorsConfig
-    @test all(
-        [logging_config.colors_config[k] == expected_colors_config[k]
-        for k in keys(expected_colors_config)])
+    @test all([
+        logging_config.colors_config[k] == expected_colors_config[k] for
+        k in keys(expected_colors_config)
+    ])
     @test logging_config.workflow === true
     @test logging_config.jobs === true
     @test logging_config.steps === false
@@ -29,21 +32,15 @@ end
 function test_loggingconfig_constructor_bad_path()
 
     @test_throws ErrorException LoggingConfig(
-        WorkflowSpec((;logging=(;
-            min_level=:not_valid_level,
-        )))
+        WorkflowSpec((; logging = (; min_level = :not_valid_level))),
     )
 
     @test_throws ErrorException LoggingConfig(
-        WorkflowSpec((;logging=(;
-            color=(;Info="not valid color"),
-        )))
+        WorkflowSpec((; logging = (; color = (; Info = "not valid color")))),
     )
 
     @test_throws ErrorException LoggingConfig(
-        WorkflowSpec((;logging=(;
-            workflow="not valid flag",
-        )))
+        WorkflowSpec((; logging = (; workflow = "not valid flag"))),
     )
 
 end

@@ -11,7 +11,7 @@ function test_workflowspec_constructor_nt()
 end
 
 function test_workflowspec_constructor_file()
-    spec_dict =  Dict("a" => 1, "b" => Dict("c" => 2, "d" => 3))
+    spec_dict = Dict("a" => 1, "b" => Dict("c" => 2, "d" => 3))
     filename = tempdir() * "/workflow.toml"
     open(filename, "w") do io
         TOML.print(io, spec_dict)
