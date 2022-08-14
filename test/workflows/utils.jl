@@ -1,10 +1,15 @@
 dict_to_namedtuple = DataWorkstation.Workflows.dict_to_namedtuple
+namedtuple_to_dict = DataWorkstation.Workflows.namedtuple_to_dict
 check_step_function_existence = DataWorkstation.Workflows.check_step_function_existence
 get_sorted_jobs_based_on_dependencies =
     DataWorkstation.Workflows.get_sorted_jobs_based_on_dependencies
 
 function test_dict_to_namedtuple()
     @test dict_to_namedtuple(Dict(:a => 1, "b" => Dict("c" => 2))) == (;a=1, b=(;c=2))
+end
+
+function test_namedtuple_to_dict()
+    @test namedtuple_to_dict((;a=1, b=(; c=2))) == Dict(:a => 1, :b => Dict(:c => 2))
 end
 
 function test_is_valid_step_function()
@@ -21,20 +26,25 @@ function test_check_step_function_existence()
 end
 
 function test_get_sorted_jobs_based_on_dependencies()
-    jobs_and_deps = [("job1", ()), ("job2", ("job1",)),
-                     ("job3", ("job4",)), ("job4", ("job1", "job2"))]
+    jobs_and_deps = [(:job1, ()), (:job2, (:job1,)),
+                     (:job3, (:job4,)), (:job4, (:job1, :job2))]
     @test get_sorted_jobs_based_on_dependencies(jobs_and_deps) == [
-        "job1", "job2", "job4", "job3"]
+        :job1, :job2, :job4, :job3]
 
     # Detect cyclic dependencies and throw error
     @test_throws ErrorException get_sorted_jobs_based_on_dependencies(
-        [("job1", ("job2",)), ("job2", ("job1",))]
+        [(:job1, (:job2,)), (:job2, (:job1,))]
     )
+
+    # Work with no dependencies declared
+    @test get_sorted_jobs_based_on_dependencies(
+        [(:job1, ()), (:job2, ()), (:job3, ())]) == [:job1, :job2, :job3]
 end
 
 @testset "utils.jl" begin
     @testset "unit" begin
         test_dict_to_namedtuple()
+        test_namedtuple_to_dict()
         test_is_valid_step_function()
         test_check_step_function_existence()
         test_get_sorted_jobs_based_on_dependencies()

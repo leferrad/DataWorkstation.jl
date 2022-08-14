@@ -23,6 +23,32 @@ dict_to_namedtuple(d::Dict) =
 dict_to_namedtuple(d) = d
 
 @doc raw"""
+    namedtuple_to_dict(nt::NamedTuple) -> Dict
+
+Utility function to convert a `NamedTuple` object into a `Dict`.
+
+Method developed for internal usage, not intended to be exported.
+
+# Arguments
+- `nt::NamedTuple`: Object to convert. Notice that the function is called recursively
+    so it could be also a NamedTuple component.
+
+# Returns
+- `Dict`: Converted object.
+
+# Examples
+```jldoctest
+julia> DataWorkstation.Workflows.namedtuple_to_dict((;a=1, b=(; c=2, d=(; e=3))))
+Dict{Symbol, Any} with 2 entries:
+  :a => 1
+  :b => Dict{Symbol, Any}(:d=>Dict(:e=>3), :c=>2)
+```
+"""
+namedtuple_to_dict(nt::NamedTuple) =
+    Dict(p.first => namedtuple_to_dict(p.second) for p in pairs(nt))
+namedtuple_to_dict(nt) = nt
+
+@doc raw"""
     is_valid_step_function(func::Function) -> Bool
 
 Returns `true` if the function is considered a valid step function for a Workflow, so
@@ -98,12 +124,10 @@ check_step_function_existence(step_type::Symbol) = begin
 end
 
 @doc raw"""
-    get_sorted_jobs_based_on_dependencies(
-        jobs_and_deps::Vector{Tuple{String, T}}
-            where {T <: Union{Tuple{String}, NTuple{N, String} where N}}
-    ) -> Vector{String}
+    get_sorted_jobs_based_on_dependencies(jobs_and_deps::Vector{Tuple{T, V}}
+    ) where V <: Union{Tuple{T}, NTuple{N, T} where N} where T -> Vector{T}
 
-Get a sorted list of `String` objects representing the correct order of dependencies
+Get a sorted list of generic `T` objects representing the correct order of dependencies
 in a sequence of jobs defined for a Worfklow. This is very useful
 to ensure a correct execution of a Worfklow.
 
@@ -112,37 +136,36 @@ The implementation was maded based on this solution: https://stackoverflow.com/a
 Method developed for internal usage, not intended to be exported.
 
 # Arguments
-- `jobs_and_deps::Vector{Tuple{String, T}}
-where {T <: Union{Tuple{String}, NTuple{N, String} where N}}`: Dependencies to process
+- `jobs_and_deps::Vector{Tuple{T, V}
+where V <: Union{Tuple{T}, NTuple{N, T} where N} where T`: Dependencies to process
 
 # Returns
-- `Vector{String}`: Order of dependencies to follow when executing the workflow associated.
+- `Vector{T}`: Order of dependencies to follow when executing the workflow associated.
 
 # Examples
 ```jldoctest
-julia> jobs_and_deps = [("job1", ()), ("job2", ("job1",)),
-                        ("job3", ("job4",)), ("job4", ("job1", "job2"))]
-4-element Vector{Tuple{String, Tuple{Vararg{String, N} where N}}}:
- ("job1", ())
- ("job2", ("job1",))
- ("job3", ("job4",))
- ("job4", ("job1", "job2"))
+julia> jobs_and_deps = [(:job1, ()), (:job2, (:job1,)),
+                        (:job3, (:job4,)), (:job4, (:job1, :job2))]
+4-element Vector{Tuple{Symbol, Tuple{Vararg{Symbol, N} where N}}}:
+(:job1, ())
+(:job2, (:job1,))
+(:job3, (:job4,))
+(:job4, (:job1, :job2))
 
 julia> DataWorkstation.Workflows.get_sorted_jobs_based_on_dependencies(jobs_and_deps)
-4-element Vector{Any}:
- "job1"
- "job2"
- "job4"
- "job3"
+4-element Vector{Symbol}:
+ :job1
+ :job2
+ :job4
+ :job3
 ```
 """
 function get_sorted_jobs_based_on_dependencies(
-    jobs_and_deps::Vector{Tuple{String, T}}
-    where {T <: Union{Tuple{String}, NTuple{N, String} where N}}
-)
+    jobs_and_deps::Vector{Tuple{T, V}}
+) where V <: Union{Tuple{T}, NTuple{N, T} where N} where T
     pending = [(job, Set(deps)) for (job, deps) in jobs_and_deps]  # To be modified in-place
     emitted = []
-    result = []
+    result::Vector{T} = []
     while !isempty(pending)
         next_pending, next_emitted = [], []
         for (name, deps) in pending
