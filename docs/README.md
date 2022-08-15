@@ -13,7 +13,7 @@ Building the documentation
 
 The documentation is built using the following command:
 
-```julia
+```bash
 julia --project=. --color=yes make.jl
 ```
 
