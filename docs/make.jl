@@ -11,18 +11,21 @@ DocMeta.setdocmeta!(
 makedocs(;
     modules = [DataWorkstation],
     authors = "Leandro Ferrado <leferrad@gmail.com> and contributors",
-    repo = "https://github.com/leferrad/DataWorkstation.jl/blob/{commit}{path}#{line}",
     sitename = "DataWorkstation.jl",
     format = Documenter.HTML(;
-        prettyurls = get(ENV, "CI", "false") == "true",
+        prettyurls = get(ENV, "CI", nothing) == "true",
         canonical = "https://leferrad.github.io/DataWorkstation.jl",
         assets = String[],
     ),
-    pages = ["Home" => "index.md"],
+    pages = [
+        "Introduction" => ["index.md",],
+        # "User Guide" => ["basics.md", "quick_example.md"],
+        # "API" => ["api_reference.md"],
+    ],
 )
 
 deploydocs(;
-    repo = "github.com/leferrad/DataWorkstation.jl",
-    devbranch = "develop",
+    repo = "github.com/leferrad/DataWorkstation.jl.git",
+    target = "build",
     push_preview = true,
 )
