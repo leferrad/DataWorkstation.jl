@@ -19,8 +19,8 @@ makedocs(;
     ),
     pages = [
         "Introduction" => ["index.md",],
-        "User Guide" => ["basics.md", "quick_example.md"],
-        "API" => ["api_reference.md"],
+        # "User Guide" => ["basics.md", "quick_example.md"],
+        # "API" => ["api_reference.md"],
     ],
 )
 
